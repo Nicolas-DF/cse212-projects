@@ -25,9 +25,15 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        if (amount == 0) return; // no need to rotate if amount is 0
+        
+        int count = data.Count; // get the count of the list
+        amount = amount % count; // in case the amount is equal to the count
+        
+        List<int> temp = new List<int>(data); // create a temporary copy of the original list
+        for (int i = 0; i < count; i++)
+        {
+            data[(i + amount) % count] = temp[i]; // rotate the list by the specified amount
+        }
     }
 }
