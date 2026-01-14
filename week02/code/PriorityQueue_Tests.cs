@@ -31,7 +31,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Create a priority queue and prompt the following people with priorities: John (2), Jane (3), James (1), Jonah (3)
     // Expected Result: Jane, Jonah, John, James
-    // Defect(s) Found: 
+    // Defect(s) Found: The for loop in Dequeue did not correctly iterate through all items in the queue to find the highest priority item.
     public void TestPriorityQueue_2()
     {
        var john = new PriorityItem("John", 2);
@@ -57,7 +57,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Create an empty priority queue and attempt to dequeue an item.
     // Expected Result: Jane, James, John
-    // Defect(s) Found: 
+    // Defect(s) Found: The RemoveAt method was missing in Dequeue, so the item with the highest priority was not being removed from the queue.
     public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
