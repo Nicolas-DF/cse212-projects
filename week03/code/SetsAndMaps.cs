@@ -56,7 +56,7 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            var degree = fields[3].Trim().ToLower();
+            var degree = fields[3].Trim();
             if (degrees.ContainsKey(degree))
             {
                 degrees[degree]++;
