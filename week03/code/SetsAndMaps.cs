@@ -22,12 +22,15 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         var wordSet = new HashSet<string>(words);
+        var seen = new HashSet<string>();
         var result = new List<string>();
         foreach (var word in words)
         {
-            if (word.Length == 2 && word[0] != word[1]) // skipping same letter words like 'aa'
+            if (!seen.Add(word)) continue; // skip if already processed
+            
+            if (word.Length == 2 && word[0] != word[1] && wordSet.Contains(word)) // skipping same letter words like 'aa'
             {
-                var reversedWord = new string(new[] {word[1], word[0]});
+                string reversedWord = $"{word[1]}{word[0]}";
                 if (wordSet.Contains(reversedWord))
                 {
                     result.Add($"{word} & {reversedWord}");
