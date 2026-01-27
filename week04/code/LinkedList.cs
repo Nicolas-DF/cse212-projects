@@ -137,37 +137,33 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Remove(int value)
     {
-        foreach (var item in this)
+        Node? curr = _head;
+        while (curr is not null)
         {
-            if (item == value)
+            if (curr.Data == value)
             {
-                // If the node to remove is the head
-                if (_head is not null && _head.Data == value)
+                // If the node to be removed is the head
+                if (curr == _head)
                 {
                     RemoveHead();
-                    return;
                 }
-                // If the node to remove is the tail
-                else if (_tail is not null && _tail.Data == value)
+                // If the node to be removed is the tail
+                else if (curr == _tail)
                 {
                     RemoveTail();
-                    return;
                 }
-                // If the node to remove is in the middle
+                // If the node to be removed is in the middle
                 else
                 {
-                    Node? curr = _head;
-                    while (curr is not null)
-                    {
-                        if (curr.Data == value)
-                        {
-                            curr.Prev!.Next = curr.Next; // Bypass the current node
-                            curr.Next!.Prev = curr.Prev; // Bypass the current node
-                            return; // Exit after removing
-                        }
-                        curr = curr.Next; // Move to the next node
-                    }
+                    curr.Prev!.Next = curr.Next; // Connect the previous node to the next node
+                    curr.Next!.Prev = curr.Prev; // Connect the next node to the previous node
                 }
+
+                return; // We can exit the function after we remove
+            }
+            else
+            {
+                curr = curr.Next; // Go to the next node to search for 'value'
             }
         }
     }
