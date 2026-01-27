@@ -137,7 +137,39 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Remove(int value)
     {
-        // TODO Problem 3
+        foreach (var item in this)
+        {
+            if (item == value)
+            {
+                // If the node to remove is the head
+                if (_head is not null && _head.Data == value)
+                {
+                    RemoveHead();
+                    return;
+                }
+                // If the node to remove is the tail
+                else if (_tail is not null && _tail.Data == value)
+                {
+                    RemoveTail();
+                    return;
+                }
+                // If the node to remove is in the middle
+                else
+                {
+                    Node? curr = _head;
+                    while (curr is not null)
+                    {
+                        if (curr.Data == value)
+                        {
+                            curr.Prev!.Next = curr.Next; // Bypass the current node
+                            curr.Next!.Prev = curr.Prev; // Bypass the current node
+                            return; // Exit after removing
+                        }
+                        curr = curr.Next; // Move to the next node
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -145,8 +177,14 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Replace(int oldValue, int newValue)
     {
-        // TODO Problem 4
+        Node? curr = _head;
+        while (curr is not null)
+        {
+            if (curr.Data == oldValue) curr.Data = newValue;
+            curr = curr.Next;
+        }
     }
+
 
     /// <summary>
     /// Yields all values in the linked list
